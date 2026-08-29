@@ -10,6 +10,7 @@ import Skills from './components/Skills'
 import Education from './components/Education'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Photo from './components/Photo'
 
 const CarouselModal = lazy(() => import('./components/CarouselModal'))
 
@@ -22,6 +23,8 @@ export default function App() {
       <main>
         <Hero />
         <Marquee />
+          <Photo />
+        
         <Work onOpenCollection={(collection) => setOpen({ collection, index: 0 })} />
         <About />
         <Experience />
