@@ -22,7 +22,7 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
-        <Marquee />
+        {/* <Marquee /> */}
           <Photo />
         
         <Work onOpenCollection={(collection) => setOpen({ collection, index: 0 })} />

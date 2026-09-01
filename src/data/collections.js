@@ -76,6 +76,8 @@ for (const [folder, entries] of folders) {
   const has3D = items.some((i) => i.type === 'model')
   const kind = has3D ? '3D' : '2D'
   const cover = coverEntry?.url || items.find((i) => i.poster)?.poster || null
+  // ponytail: no still anywhere? let the card poster itself off the first video
+  const coverVideo = cover ? null : items.find((i) => i.type === 'video')?.src ?? null
   const title = titleCase(folder)
   const meta = DESIGN_META[title] || {}
 
@@ -84,6 +86,8 @@ for (const [folder, entries] of folders) {
     title,
     kind,
     cover,
+    coverVideo,
+    category: meta.category || (has3D ? 'Interactive 3D' : 'Architectural Visualization'),
     count: items.length,
     models: items.filter((i) => i.type === 'model').length,
     photos: items.filter((i) => i.type === 'image').length,

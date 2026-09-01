@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Box, Images, Layers, Maximize2 } from 'lucide-react'
+import { ArrowUpRight, Box, Layers } from 'lucide-react'
 import { COLLECTIONS, FILTERS, matchesFilter } from '../data/collections'
 import Reveal from './Reveal'
 
 function countLabel(c) {
   const parts = []
   if (c.models) parts.push(`${c.models} 3D model${c.models > 1 ? 's' : ''}`)
-  if (c.photos) parts.push(`${c.photos} photo${c.photos > 1 ? 's' : ''}`)
+  if (c.photos) parts.push(`${c.photos} image${c.photos > 1 ? 's' : ''}`)
   if (c.videos) parts.push(`${c.videos} video${c.videos > 1 ? 's' : ''}`)
   return parts.join(' · ')
 }
@@ -64,21 +64,24 @@ export default function Work({ onOpenCollection }) {
                   <div className="card__media">
                     {c.cover ? (
                       <img src={c.cover} alt={c.title} loading="lazy" />
+                    ) : c.coverVideo ? (
+                      // ponytail: native poster frame — drop a same-named .jpg beside the
+                      // .mp4 and collections.js uses that instead, no video fetch at all
+                      <video src={`${c.coverVideo}#t=2`} preload="metadata" muted playsInline tabIndex={-1} />
                     ) : (
                       <div className="card__noimg"><Box /><span>3D Collection</span></div>
                     )}
-                    <span className="card__scrim" />
-                    {c.kind === '3D' ? (
-                      <span className="card__tag card__tag--3d"><Box /> 3D Collection</span>
-                    ) : (
-                      <span className="card__tag"><Images /> {c.count} {c.count > 1 ? 'shots' : 'shot'}</span>
-                    )}
-                    <span className="card__open"><Maximize2 /></span>
+                    <span className="card__num">{String(i + 1).padStart(2, '0')}</span>
                   </div>
+
                   <div className="card__body">
-                    <span className="card__cat">{c.kind === '3D' ? 'Interactive' : 'Gallery'}</span>
                     <h3 className="card__title">{c.title}</h3>
+                    <span className="card__cat">{c.category}</span>
+                  </div>
+
+                  <div className="card__foot">
                     <span className="card__meta"><Layers size={15} /> {countLabel(c)}</span>
+                    <span className="card__cta">View Project <ArrowUpRight size={15} /></span>
                   </div>
                 </button>
               </motion.div>

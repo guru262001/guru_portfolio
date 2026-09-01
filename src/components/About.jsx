@@ -8,6 +8,7 @@ import {
   PlayCircle,
 } from 'lucide-react'
 import Reveal from './Reveal'
+import aboutImage from '../designs/Exterior/09.jpg'
 
 const FEATURES = [
   {
@@ -109,7 +110,7 @@ export default function About() {
             <div className="about-image">
 
               <img
-                src="src\designs\Exterior\09.jpg"
+                src={aboutImage}
                 alt="Architectural interior visualization"
                 loading="lazy"
               />

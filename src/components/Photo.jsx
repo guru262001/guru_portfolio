@@ -3,7 +3,7 @@ import "./Photo.css";
 
 const Photo = () => {
   return (
-    <section className="hero">
+    <section className="photo-hero">
 
       {/* Background Image */}
       <div className="hero-image" />
@@ -30,9 +30,9 @@ const Photo = () => {
 
           {/* Description */}
           <p className="hero-description">
-            I create photorealistic architectural visualizations and
-            walkthroughs that help architects, developers and
-            designers present their ideas with impact.
+            3D Architectural Visualizer crafting <strong>photorealistic renders</strong> and{' '}
+            <strong>real-time walkthroughs</strong> that win client approval &mdash; from raw
+            CAD to client-ready visuals for residential &amp; commercial spaces.
           </p>
 
           {/* Buttons */}

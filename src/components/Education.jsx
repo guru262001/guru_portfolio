@@ -27,7 +27,7 @@ export default function Education() {
     <section className="section" id="education">
       <div className="container">
         <Reveal className="section-head">
-          <span className="eyebrow">Education &amp; Languages</span>
+          <span className="eyebrow">Education</span>
           <h2 className="section-title">Trained for <em>the pipeline</em></h2>
         </Reveal>
 
@@ -43,7 +43,7 @@ export default function Education() {
           ))}
         </div>
 
-        <Reveal className="langs">
+        {/* <Reveal className="langs">
           <span className="pill" style={{ borderColor: 'var(--gold-line)', color: 'var(--gold)' }}>
             <Languages size={15} /> Languages
           </span>
@@ -53,7 +53,7 @@ export default function Education() {
               <span>{l.level}</span>
             </div>
           ))}
-        </Reveal>
+        </Reveal> */}
       </div>
     </section>
   )

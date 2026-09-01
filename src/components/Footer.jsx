@@ -11,8 +11,12 @@ export default function Footer() {
             <span className="brand__role">3D Architectural Visualizer</span>
           </span>
         </div>
-        <p>© {new Date().getFullYear()} S. Guru Prasath · Chennai, Tamil Nadu</p>
-        <a href="#top" className="to-top">Back to top <ArrowUp size={16} /></a>
+        <p>
+          © {new Date().getFullYear()} S. Guru Prasath · Chennai, Tamil Nadu, India
+          <br />
+          All rights reserved.
+        </p>
+        <a href="#top" className="to-top">Back to top <span><ArrowUp size={15} /></span></a>
       </div>
     </footer>
   )
