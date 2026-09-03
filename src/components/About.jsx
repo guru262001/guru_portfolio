@@ -8,7 +8,6 @@ import {
   PlayCircle,
 } from 'lucide-react'
 import Reveal from './Reveal'
-import aboutImage from '../designs/Exterior/09.jpg'
 
 const FEATURES = [
   {
@@ -104,21 +103,6 @@ export default function About() {
             className="about-right"
             delay={120}
           >
-
-            {/* IMAGE */}
-
-            <div className="about-image">
-
-              <img
-                src={aboutImage}
-                alt="Architectural interior visualization"
-                loading="lazy"
-              />
-
-              <div className="about-image-overlay" />
-
-            </div>
-
 
             {/* TEXT */}
 

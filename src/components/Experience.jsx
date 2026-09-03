@@ -1,3 +1,4 @@
+import { DraftingCompass, Clock } from 'lucide-react'
 import Reveal from './Reveal'
 
 const ROLES = [
@@ -29,13 +30,13 @@ export default function Experience() {
         <div className="timeline">
           {ROLES.map((r) => (
             <Reveal className="tl-item" key={r.company}>
-              <span className="tl-dot" />
+              <span className="tl-dot"><DraftingCompass /></span>
               <div className="tl-head">
                 <div>
                   <div className="tl-role">{r.role}</div>
                   <div className="tl-co">{r.company} · {r.place}</div>
                 </div>
-                <div className="tl-period">{r.period}</div>
+                <div className="tl-period"><Clock /> {r.period}</div>
               </div>
               <ul className="tl-list">
                 {r.points.map((pt, i) => <li key={i}>{pt}</li>)}
