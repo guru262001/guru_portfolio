@@ -288,45 +288,7 @@ export default function Skills() {
             CORE STRENGTHS
         ====================================================== */}
 
-        <Reveal className="skills-group">
-
-          <span className="skills-label">
-            Core Strengths
-          </span>
-
-          <div className="strength-grid">
-
-            {STRENGTHS.map((item) => (
-
-              <div
-                className="strength-card"
-                key={item.title}
-              >
-
-                <div className="strength-icon">
-                  {item.icon}
-                </div>
-
-
-                <div>
-
-                  <h3>
-                    {item.title}
-                  </h3>
-
-                  <p>
-                    {item.text}
-                  </p>
-
-                </div>
-
-              </div>
-
-            ))}
-
-          </div>
-
-        </Reveal>
+        
 
       </div>
 

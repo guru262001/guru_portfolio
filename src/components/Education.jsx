@@ -1,5 +1,6 @@
 import { GraduationCap, Languages } from 'lucide-react'
 import Reveal from './Reveal'
+import auraImage from '../designs/Exterior/Villa View 01.jpg'
 
 const EDU = [
   {
@@ -25,6 +26,7 @@ const LANGS = [
 export default function Education() {
   return (
     <section className="section" id="education">
+      <div className="aura" aria-hidden="true"><img src={auraImage} alt="" loading="lazy" /></div>
       <div className="container">
         <Reveal className="section-head">
           <span className="eyebrow">Education</span>

@@ -43,7 +43,9 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+/* ponytail: the section's own 74px top padding already clears the 74px navbar,
+   so this is only a few px of breathing room, not the whole nav height */
+html { scroll-behavior: smooth; scroll-padding-top: 8px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
@@ -83,8 +85,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* ---------- layout primitives ---------- */
 .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
-.section { position: relative; padding: 92px 0; z-index: 3; }
-.section--tight { padding: 72px 0; }
+.section { position: relative; padding: clamp(52px, 5.5vw, 74px) 0; z-index: 3; }
+.section--tight { padding: clamp(40px, 4.5vw, 60px) 0; }
 
 .eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
@@ -191,7 +193,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .hero__title {
   font-family: var(--font-serif); font-weight: 500; letter-spacing: -0.015em;
-  font-size: clamp(3.2rem, 7.6vw, 6.2rem); line-height: 1.02; margin-top: 14px;
+  font-size: clamp(2.6rem, 5.2vw, 4.6rem); line-height: 1.04; margin-top: 14px;
 }
 .hero__title .line { display: block; }
 .hero__title em { font-style: normal; background: linear-gradient(120deg, var(--gold-bright), var(--gold) 55%, var(--gold-deep)); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -386,7 +388,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   /* ponytail: clip only sideways (the offset image), never the copy */
   overflow-x: clip;
 
-  padding: 74px 0 28px;
+  padding: clamp(52px, 5.5vw, 74px) 0 28px;
 
   z-index: 3;
 }
@@ -656,6 +658,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   z-index: 1;
 
   opacity: 0.58;
+
+  /* ponytail: one mask kills all four hard edges — no wrapper, no extra gradients */
+  -webkit-mask-image:
+    linear-gradient(180deg, transparent, #000 16%, #000 74%, transparent),
+    linear-gradient(90deg, transparent, #000 38%);
+  mask-image:
+    linear-gradient(180deg, transparent, #000 16%, #000 74%, transparent),
+    linear-gradient(90deg, transparent, #000 38%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 
   pointer-events: none;
 }
@@ -1680,12 +1692,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
   margin: 0 clamp(30px, 4.2vw, 58px); padding: 30px 0 clamp(30px, 4.2vw, 58px); border-top: 1px solid var(--line);
 }
-.method { display: flex; align-items: center; gap: 13px; padding: 15px 17px; border-radius: 14px; border: 1px solid var(--line); background: rgba(255,255,255,0.02); transition: all .35s var(--ease); min-width: 0; }
+.method { display: flex; align-items: center; gap: 11px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: rgba(255,255,255,0.02); transition: all .35s var(--ease); min-width: 0; }
 .method:hover { border-color: var(--gold-line); transform: translateY(-3px); }
-.method .ic { width: 40px; height: 40px; flex-shrink: 0; border-radius: 10px; display: grid; place-items: center; background: var(--gold-soft); color: var(--gold); }
-.method .ic svg { width: 19px; height: 19px; }
-.method__k { display: block; font-size: 0.68rem; letter-spacing: 1.4px; text-transform: uppercase; color: var(--text-mut); }
-.method__v { display: block; font-family: var(--font-display); font-size: 0.94rem; overflow-wrap: anywhere; }
+.method .ic { width: 34px; height: 34px; flex-shrink: 0; border-radius: 9px; display: grid; place-items: center; background: var(--gold-soft); color: var(--gold); }
+.method .ic svg { width: 16px; height: 16px; }
+.method__k { display: block; font-size: 0.6rem; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-mut); }
+.method__v { display: block; font-family: var(--font-display); font-size: 0.83rem; overflow-wrap: anywhere; }
 
 @media (max-width: 980px) {
   .contact__main { grid-template-columns: 1fr; }
@@ -1714,8 +1726,24 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ============================================================
    REVEAL (used by <Reveal/>)
    ============================================================ */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal { opacity: 0; transform: translateY(34px) scale(0.99); transition: opacity 1.05s var(--ease), transform 1.05s var(--ease); }
 .reveal.in { opacity: 1; transform: none; }
+
+/* ponytail: stagger is one nth-child rule, not a delay prop threaded through every component.
+   Scoped to text blocks — cards/images animate as a whole so absolute children stay put. */
+.reveal.in.section-head > *,
+.reveal.in.skills-header > *,
+.reveal.in.about-left > * { animation: rise .8s var(--ease) both; }
+.reveal.in.section-head > *:nth-child(2),
+.reveal.in.skills-header > *:nth-child(2),
+.reveal.in.about-left > *:nth-child(2) { animation-delay: .07s; }
+.reveal.in.section-head > *:nth-child(3),
+.reveal.in.skills-header > *:nth-child(3),
+.reveal.in.about-left > *:nth-child(3) { animation-delay: .14s; }
+.reveal.in.section-head > *:nth-child(n+4),
+.reveal.in.skills-header > *:nth-child(n+4),
+.reveal.in.about-left > *:nth-child(n+4) { animation-delay: .21s; }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 
 /* ============================================================
    RESPONSIVE
@@ -1731,7 +1759,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .modal__aside { max-height: 48svh; }
 }
 @media (max-width: 720px) {
-  .section { padding: 88px 0; }
+  .section { padding: 56px 0; }
   .container { padding: 0 20px; }
   .nav__links { display: none; }
   .nav__burger { display: grid; }
@@ -1741,4 +1769,82 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .modal__specs { grid-template-columns: 1fr 1fr; }
   .hero__stats { gap: 26px; }
   .section-head--split { align-items: flex-start; }
+}
+
+/* ============================================================
+   SECTION LANGUAGE — matches About / Contact
+   ============================================================ */
+
+/* headings read like the About heading, not like a slide title */
+.section-title,
+.skills-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 4.5vw, 4.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+.skills-title em { color: var(--gold); font-style: normal; }
+
+/* the gold rule About uses under its heading — as a pseudo, not a div in every section */
+.section-title::after,
+.skills-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 2px;
+  margin-top: 26px;
+  background: var(--gold);
+}
+
+/* one panel treatment: the Contact card / stats bar surface */
+.card__btn,
+.edu-card,
+.timeline {
+  border-radius: 20px;
+  border: 1px solid var(--line-strong);
+  background: linear-gradient(180deg, rgba(20, 23, 29, 0.82), rgba(14, 16, 20, 0.7));
+}
+/* only where an aura actually shows through — blur behind 12 opaque cards is wasted */
+.edu-card,
+.timeline {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.timeline { padding: clamp(24px, 3vw, 40px); }
+.tl-item:last-child { padding-bottom: 0; }
+.edu-card { border-radius: 22px; }
+
+/* ambient render behind text-only sections, feathered like the About image */
+.aura {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 58%;
+  z-index: 0;
+  opacity: 0.4;
+  overflow: hidden;
+  pointer-events: none;
+}
+.aura img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5) saturate(0.7);
+}
+/* ponytail: two masks intersected — no overlay divs, no extra gradients */
+.aura {
+  right: -28px;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 74%, transparent), linear-gradient(90deg, transparent, #000 42%);
+  mask-image: linear-gradient(180deg, transparent, #000 18%, #000 74%, transparent), linear-gradient(90deg, transparent, #000 42%);
+}
+
+/* copy sits above the aura; the offset never creates a horizontal scrollbar */
+.section { overflow-x: clip; }
+.section > .container { position: relative; z-index: 1; }
+
+@media (max-width: 900px) {
+  .aura { width: 100%; right: 0; opacity: 0.22; }
 }
