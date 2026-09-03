@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Photo.css";
 
 const Photo = () => {
+  // fade the loop in only once it actually plays, so a slow network never pops
+  const [playing, setPlaying] = useState(false);
+
   return (
     <section className="photo-hero">
 
-      {/* Background Image */}
-      <div className="hero-image" />
+      {/* Background still, with an optional loop layered over it */}
+      <div className="hero-image">
+        <video
+          className={`hero-video ${playing ? "is-playing" : ""}`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          onPlaying={() => setPlaying(true)}
+        >
+          <source src="/hero-loop.mp4" type="video/mp4" />
+        </video>
+      </div>
 
       {/* Dark Overlay */}
       <div className="hero-overlay" />
