@@ -20,6 +20,7 @@ import d5Logo from '../logos/d5.png'
 import photoshopLogo from '../logos/photoshop.png'
 import autocadLogo from '../logos/autocad.png'
 import premiereLogo from '../logos/premier.png'
+import animaLogo from '../logos/chaosanime.png'
 
 
 /* ============================================================
@@ -53,14 +54,19 @@ const SOFTWARE = [
     logo: photoshopLogo,
   },
   {
+    name: 'Premiere Pro',
+    subtitle: 'Video Editing',
+    logo: premiereLogo,
+  },
+  {
     name: 'AutoCAD',
     subtitle: 'CAD Drawings',
     logo: autocadLogo,
   },
   {
-    name: 'Premiere Pro',
-    subtitle: 'Video Editing',
-    logo: premiereLogo,
+    name: 'Chaos Anima',
+    subtitle: 'Crowd Simulation',
+    logo: animaLogo,
   },
 ]
 
