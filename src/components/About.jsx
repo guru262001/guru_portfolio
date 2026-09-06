@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import {
   Gauge,
   Layers,
@@ -13,12 +14,12 @@ const FEATURES = [
   {
     icon: <Layers />,
     title: 'CAD to production-ready 3D',
-    text: 'From drawings to detailed 3D models with precision.',
+    text: 'From drawings to detailed 3D models.',
   },
   {
     icon: <Sparkles />,
     title: 'Photorealistic rendering',
-    text: 'High-end visuals with accurate lighting, materials & mood.',
+    text: 'High-end visuals with accurate lighting.',
   },
   {
     icon: <MonitorPlay />,
@@ -28,8 +29,15 @@ const FEATURES = [
   {
     icon: <Gauge />,
     title: 'Optimized render pipelines',
-    text: 'Efficient workflows for faster turnaround without compromising quality.',
+    text: 'Fast turnarounds without compromising quality.',
   },
+]
+
+const STATS = [
+  { icon: <Box />, value: '1.5+', label: 'Years Experience' },
+  { icon: <Layers />, value: '20+', label: 'Projects Completed' },
+  { icon: <Image />, value: '50+', label: 'High Quality Renders' },
+  { icon: <PlayCircle />, value: '8+', label: 'Walkthrough Animations' },
 ]
 
 export default function About() {
@@ -39,7 +47,7 @@ export default function About() {
       <div className="container">
 
         {/* =========================================
-            MAIN ABOUT CONTENT
+            TOP — HEADING + COPY
         ========================================= */}
 
         <div className="about-layout">
@@ -50,44 +58,16 @@ export default function About() {
             <span className="eyebrow">About Me</span>
 
             <h2 className="about-heading">
-              I turn raw CAD
+              I turn raw CAD drawings
               <br />
-              drawings into
-              <br />
-              <em>client-winning</em>
-              <br />
-              <em>visuals.</em>
+              into <em>client-winning visuals.</em>
             </h2>
 
             <div className="about-gold-line" />
 
             <p className="about-intro">
-              With a performance-oriented mindset and a sharp eye for
-              detail, I create photorealistic renders and real-time
-              walkthroughs that help architects, developers and
-              designers present their ideas with impact.
+             With a performance-oriented mindset and a sharp eye for detail, I create photorealistic renders and real-time walkthroughs that help architects, developers and designers present their ideas with impact.
             </p>
-
-            {/* FEATURE GRID */}
-
-            <div className="about-features">
-
-              {FEATURES.map((feature) => (
-                <div className="about-feature" key={feature.title}>
-
-                  <div className="about-feature-icon">
-                    {feature.icon}
-                  </div>
-
-                  <div>
-                    <h3>{feature.title}</h3>
-                    <p>{feature.text}</p>
-                  </div>
-
-                </div>
-              ))}
-
-            </div>
 
           </Reveal>
 
@@ -99,12 +79,7 @@ export default function About() {
 
           {/* RIGHT COLUMN */}
 
-          <Reveal
-            className="about-right"
-            delay={120}
-          >
-
-            {/* TEXT */}
+          <Reveal className="about-right" delay={120}>
 
             <div className="about-copy">
 
@@ -120,22 +95,11 @@ export default function About() {
               <p>
                 I work across{' '}
                 <b>
-                  3ds Max, V-Ray, D5 Render,
-                  Chaos Vantage and Photoshop
-                </b>{' '}
-                — translating floor plans and elevations into accurate,
-                atmospheric scenes, then optimizing geometry and render
-                settings so turnaround stays tight and deliverables
-                stay sharp.
-              </p>
-
-              <div className="about-copy-line" />
-
-              <p>
-                I’m looking to bring strong rendering fundamentals to a
-                growth-stage architecture or interior design firm —
-                the kind of place where great visuals directly move
-                approvals and sales.
+                  3ds Max, V-Ray, D5 Render, Chaos Vantage
+                  and Photoshop
+                </b>
+                {' '}— optimizing geometry and render settings so
+                turnarounds stay tight and deliverables stay sharp.
               </p>
 
             </div>
@@ -146,77 +110,53 @@ export default function About() {
 
 
         {/* =========================================
+            FEATURE GRID — full width
+        ========================================= */}
+
+        <Reveal className="about-features" delay={150}>
+
+          {FEATURES.map((feature) => (
+            <div className="about-feature" key={feature.title}>
+
+              <div className="about-feature-icon">
+                {feature.icon}
+              </div>
+
+              <div>
+                <h3>{feature.title}</h3>
+                <p>{feature.text}</p>
+              </div>
+
+            </div>
+          ))}
+
+        </Reveal>
+
+
+        {/* =========================================
             STATS BAR
         ========================================= */}
 
-        <Reveal
-          className="about-stats"
-          delay={180}
-        >
+        <Reveal className="about-stats" delay={180}>
 
-          <div className="about-stat">
+          {STATS.map((stat, i) => (
+            <Fragment key={stat.label}>
+              {i > 0 && <div className="about-stat-divider" />}
 
-            <div className="about-stat-icon">
-              <Box />
-            </div>
+              <div className="about-stat">
 
-            <div>
-              <strong>1.5+</strong>
-              <span>Years Experience</span>
-            </div>
+                <div className="about-stat-icon">
+                  {stat.icon}
+                </div>
 
-          </div>
+                <div>
+                  <strong>{stat.value}</strong>
+                  <span>{stat.label}</span>
+                </div>
 
-
-          <div className="about-stat-divider" />
-
-
-          <div className="about-stat">
-
-            <div className="about-stat-icon">
-              <Layers />
-            </div>
-
-            <div>
-              <strong>20+</strong>
-              <span>Projects Completed</span>
-            </div>
-
-          </div>
-
-
-          <div className="about-stat-divider" />
-
-
-          <div className="about-stat">
-
-            <div className="about-stat-icon">
-              <Image />
-            </div>
-
-            <div>
-              <strong>50+</strong>
-              <span>High Quality Renders</span>
-            </div>
-
-          </div>
-
-
-          <div className="about-stat-divider" />
-
-
-          <div className="about-stat">
-
-            <div className="about-stat-icon">
-              <PlayCircle />
-            </div>
-
-            <div>
-              <strong>8+</strong>
-              <span>Walkthrough Animations</span>
-            </div>
-
-          </div>
+              </div>
+            </Fragment>
+          ))}
 
         </Reveal>
 

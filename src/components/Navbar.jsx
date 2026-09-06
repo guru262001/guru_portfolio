@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
 import { useScrolled, useActiveSection } from '../hooks'
+import logo from '../logos/gp.png'
 
 const LINKS = [
   { id: 'work', label: 'Work' },
@@ -20,7 +21,7 @@ export default function Navbar() {
     <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="container nav__inner">
         <a href="#top" className="brand" aria-label="Guru Prasath — home">
-          {/* <span className="brand__mark">GP</span> */}
+          <img className="brand__mark" src={logo} alt="" width="58" height="54" />
           <span>
             <span className="brand__name">Guru Prasath</span>
             <span className="brand__role">3D Architectural Visualizer</span>

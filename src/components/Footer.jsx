@@ -1,11 +1,12 @@
 import { ArrowUp } from 'lucide-react'
+import logo from '../logos/gp.png'
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer__inner">
         <div className="brand">
-          <span className="brand__mark">GP</span>
+          <img className="brand__mark" src={logo} alt="" width="56" height="52" />
           <span>
             <span className="brand__name">S. Guru Prasath</span>
             <span className="brand__role">3D Architectural Visualizer</span>

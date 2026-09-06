@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Quote, Sparkles } from 'lucide-react'
+import helloImg from '../logos/hello.png'
 
 const rise = {
   hidden: { opacity: 0, y: 26 },
@@ -16,9 +17,17 @@ export default function Hero() {
 
       <div className="container hero__grid">
         <div className="hero__intro">
-          <motion.p className="hero__hello" variants={rise} initial="hidden" animate="show" custom={0}>
-            Hello, I&rsquo;m
-          </motion.p>
+          <motion.img
+            className="hero__hello"
+            src={helloImg}
+            alt="Hello, I'm"
+            width="420"
+            height="148"
+            variants={rise}
+            initial="hidden"
+            animate="show"
+            custom={0}
+          />
 
           <motion.h1 className="hero__title" variants={rise} initial="hidden" animate="show" custom={1}>
             <span className="line">Guru</span>

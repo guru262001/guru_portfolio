@@ -45,9 +45,9 @@ const Photo = () => {
 
           {/* Description */}
           <p className="hero-description">
-            3D Architectural Visualizer crafting <strong>photorealistic renders</strong> and{' '}
-            <strong>real-time walkthroughs</strong> that win client approval &mdash; from raw
-            CAD to client-ready visuals for residential &amp; commercial spaces.
+            I create <strong>immersive architectural visuals</strong> that bring design
+            intent to life &mdash; combining refined composition, realistic materials,
+            lighting and atmosphere to communicate spaces with clarity and impact.
           </p>
 
           {/* Buttons */}
