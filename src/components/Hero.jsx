@@ -41,9 +41,9 @@ export default function Hero() {
           <span className="hero__rule" />
 
           <motion.p className="hero__sub" variants={rise} initial="hidden" animate="show" custom={3}>
-            3D Architectural Visualizer crafting <strong>photorealistic renders</strong> and{' '}
+            I craft <strong>photorealistic renders</strong> and{' '}
             <strong>real-time walkthroughs</strong> that win client approval &mdash; from raw CAD
-            to client-ready visuals for residential &amp; commercial spaces.
+            to client-ready visuals for residential, commercial and hospitality spaces.
           </motion.p>
 
           <motion.blockquote className="hero__quote" variants={rise} initial="hidden" animate="show" custom={4}>

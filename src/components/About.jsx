@@ -14,7 +14,7 @@ const FEATURES = [
   {
     icon: <Layers />,
     title: 'CAD to production-ready 3D',
-    text: 'From drawings to detailed 3D models.',
+    text: 'From drawings to optimized, scene-ready 3D models.',
   },
   {
     icon: <Sparkles />,
@@ -87,7 +87,7 @@ export default function About() {
                 I’m an Architectural 3D Visualizer with production
                 experience at a Chennai-based design studio, delivering
                 photorealistic renders and real-time walkthroughs for
-                residential and commercial clients.
+                residential, commercial and hospitality clients.
               </p>
 
               <div className="about-copy-line" />

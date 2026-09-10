@@ -105,6 +105,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .section-title em { font-style: normal; color: var(--gold); }
 .section-lead { color: var(--text-dim); max-width: 56ch; margin-top: 18px; font-size: 1.06rem; }
+.work-lead { max-width: 95ch; }
+@media (max-width: 900px) {
+  .work-lead-br { display: none; }
+}
 
 .section-head { margin-bottom: 48px; }
 .section-head--split { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }

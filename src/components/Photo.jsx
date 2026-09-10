@@ -47,7 +47,7 @@ const Photo = () => {
           <p className="hero-description">
             I create <strong>immersive architectural visuals</strong> that bring design
             intent to life &mdash; combining refined composition, realistic materials,
-            lighting and atmosphere to communicate spaces with clarity and impact.
+            lighting and atmosphere to convey spaces with clarity and impact.
           </p>
 
           {/* Buttons */}
@@ -191,7 +191,7 @@ const Photo = () => {
 
             <div className="stat-text">
               <strong>50+</strong>
-              <span>High quality renders</span>
+              <span>High-quality renders</span>
             </div>
 
           </div>

@@ -13,7 +13,7 @@ const EDU = [
     yr: '2018 — 2022',
     title: 'B.Sc. (Hons.) Agriculture',
     school: 'Mother Teresa College of Agriculture, Pudukkottai, Tamil Nadu',
-    desc: 'Undergraduate degree that built the analytical rigour and discipline that I now apply to visualization and design.',
+    desc: 'Undergraduate degree that built the analytical rigor and discipline that I now apply to visualization and design.',
   },
 ]
 

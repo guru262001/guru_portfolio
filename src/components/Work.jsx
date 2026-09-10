@@ -25,10 +25,10 @@ export default function Work({ onOpenCollection }) {
             <h2 className="section-title">
               Renders you can <em>walk into</em>
             </h2>
-            <p className="section-lead">
-              Photoreal interiors, exteriors and real-time walkthroughs — grouped into
-              collections. Open one to flip through every shot, and orbit the 3D pieces
-              live, just like a client review.
+            <p className="section-lead work-lead">
+              Photorealistic interiors, exteriors, and walkthroughs - selected and organized into collections.
+              <br className="work-lead-br" />
+              Explore each project through a focused visual presentation that brings the design, atmosphere, and details to life.
             </p>
           </div>
           {FILTERS.length > 1 && (

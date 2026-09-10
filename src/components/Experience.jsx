@@ -14,7 +14,7 @@ const ROLES = [
       <>Built <b>V-Ray lighting and material libraries</b> adopted studio-wide, standardizing output quality and cutting per-project lighting setup time by <b>~25%</b>.</>,
       <>Produced <b>real-time walkthroughs in Chaos Vantage</b>, enabling live client design reviews and significantly reducing revision cycles.</>,
       <>Optimized scene geometry, proxies and render settings — <b>cutting render times by up to 20%</b> on high-poly scenes while keeping visuals client-ready.</>,
-      <>Contributed to <b>8 architectural walkthrough animations</b> and independently executed a complete residential walkthrough end-to-end: scene prep, lighting, camera animation, rendering and post-production.</>,
+      <>Contributed to <b>8 architectural walkthrough animations</b> and independently executed a complete residential walkthrough end-to-end: scene preparation, lighting, camera animation, rendering and post-production.</>,
     ],
   },
 ]
