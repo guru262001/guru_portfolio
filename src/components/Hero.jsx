@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Quote, Sparkles } from 'lucide-react'
+import { ArrowUpRight, Quote } from 'lucide-react'
 import helloImg from '../logos/hello.png'
+import resumePdf from '../logos/GuruPrasath_Resume.pdf'
 
 const rise = {
   hidden: { opacity: 0, y: 26 },
@@ -55,8 +56,26 @@ export default function Hero() {
             <a href="#work" className="btn btn--primary">
               Explore my work <ArrowUpRight />
             </a>
-            <a href="#contact" className="btn btn--ghost">
-              <Sparkles /> Start a project
+            <a
+              href={resumePdf}
+              download="GuruPrasath_Resume.pdf"
+              className="btn btn--ghost"
+            >
+              <svg
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path fill="none" d="M0 0h24v24H0z" stroke="none"></path>
+                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                <path d="M7 11l5 5l5 -5"></path>
+                <path d="M12 4l0 12"></path>
+              </svg>
+              Download Resume
             </a>
           </motion.div>
         </div>
