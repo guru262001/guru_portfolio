@@ -26,7 +26,7 @@
 .hero-image {
   position: absolute;
   top: 36px;
-  right: -155px;
+  right: calc(-1 * min(155px, max(0px, (100vw - var(--maxw)) * 0.22)));
   bottom: 0;
 
   width: 60%;
@@ -401,6 +401,7 @@
 
   .hero-image {
     width: 62%;
+    right: 0;
   }
 
   .hero-content {
