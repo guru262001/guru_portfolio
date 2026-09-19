@@ -17,7 +17,7 @@ export default function Work({ onOpenCollection }) {
   const filtered = useMemo(() => COLLECTIONS.filter((c) => matchesFilter(c, filter)), [filter])
 
   return (
-    <section className="section" id="work">
+    <section className="section" id="gallery">
       <div className="container">
         <Reveal className="section-head section-head--split">
           <div>
@@ -34,15 +34,33 @@ export default function Work({ onOpenCollection }) {
           {FILTERS.length > 1 && (
             <div className="filters" role="tablist" aria-label="Filter collections">
               {FILTERS.map((f) => (
-                <button
+                <motion.button
                   key={f}
                   role="tab"
                   aria-selected={filter === f}
                   className={`filter ${filter === f ? 'is-active' : ''}`}
                   onClick={() => setFilter(f)}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.96 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                 >
-                  {f}
-                </button>
+                  {filter === f && (
+                    <motion.span
+                      layoutId="activeFilterPill"
+                      className="filter__pill"
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        borderRadius: '999px',
+                        background: 'var(--gold)',
+                        boxShadow: '0 2px 12px rgba(217, 164, 65, 0.4)',
+                        zIndex: 0,
+                      }}
+                      transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                    />
+                  )}
+                  <span style={{ position: 'relative', zIndex: 1 }}>{f}</span>
+                </motion.button>
               ))}
             </div>
           )}
@@ -54,10 +72,11 @@ export default function Work({ onOpenCollection }) {
               <motion.div
                 key={c.id}
                 layout
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.45, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ opacity: 0, scale: 0.94, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.94, y: -10 }}
+                transition={{ duration: 0.45, delay: Math.min(i * 0.04, 0.3), ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -6 }}
                 className="card"
               >
                 <button className="card__btn" onClick={() => onOpenCollection(c)} aria-label={`Open ${c.title} collection`}>
@@ -65,8 +84,6 @@ export default function Work({ onOpenCollection }) {
                     {c.cover ? (
                       <img src={c.cover} alt={c.title} loading="lazy" />
                     ) : c.coverVideo ? (
-                      // ponytail: native poster frame — drop a same-named .jpg beside the
-                      // .mp4 and collections.js uses that instead, no video fetch at all
                       <video src={`${c.coverVideo}#t=2`} preload="metadata" muted playsInline tabIndex={-1} />
                     ) : (
                       <div className="card__noimg"><Box /><span>3D Collection</span></div>
@@ -81,7 +98,9 @@ export default function Work({ onOpenCollection }) {
 
                   <div className="card__foot">
                     <span className="card__meta"><Layers size={15} /> {countLabel(c)}</span>
-                    <span className="card__cta">View Project <ArrowUpRight size={15} /></span>
+                    <span className="card__cta">
+                      View Project <ArrowUpRight size={15} className="card__arrow" />
+                    </span>
                   </div>
                 </button>
               </motion.div>
@@ -92,3 +111,4 @@ export default function Work({ onOpenCollection }) {
     </section>
   )
 }
+

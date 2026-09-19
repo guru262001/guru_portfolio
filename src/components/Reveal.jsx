@@ -1,34 +1,35 @@
-import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
 
-/** Lightweight scroll-reveal: adds `.in` when the element enters the viewport. */
-export default function Reveal({ children, delay = 0, as: Tag = 'div', className = '', ...rest }) {
-  const ref = useRef(null)
-  const [shown, setShown] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setShown(true)
-          io.unobserve(el)
-        }
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
+/** Hardware-accelerated scroll-reveal using Framer Motion */
+export default function Reveal({
+  children,
+  delay = 0,
+  y = 28,
+  x = 0,
+  duration = 0.75,
+  as = 'div',
+  className = '',
+  style = {},
+  ...rest
+}) {
+  const Component = motion[as] || motion.div
 
   return (
-    <Tag
-      ref={ref}
-      className={`reveal ${shown ? 'in' : ''} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+    <Component
+      className={`reveal in ${className}`}
+      initial={{ opacity: 0, y, x }}
+      whileInView={{ opacity: 1, y: 0, x: 0 }}
+      viewport={{ once: true, amount: 0.12, margin: '0px 0px -30px 0px' }}
+      transition={{
+        duration,
+        delay: delay ? delay / 1000 : 0,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      style={style}
       {...rest}
     >
       {children}
-    </Tag>
+    </Component>
   )
 }
+

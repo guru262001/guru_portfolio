@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight, Rotate3d, Box, Play, Film } from 'lucide-react'
 import { useLockBodyScroll } from '../hooks'
 
@@ -79,15 +79,45 @@ function ThumbIcon({ type }) {
   return null
 }
 
+const slideVariants = {
+  enter: (direction) => ({
+    x: direction > 0 ? 50 : direction < 0 ? -50 : 0,
+    opacity: 0,
+    scale: 0.98,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.35,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+  exit: (direction) => ({
+    x: direction < 0 ? 50 : direction > 0 ? -50 : 0,
+    opacity: 0,
+    scale: 0.98,
+    transition: {
+      duration: 0.22,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  }),
+}
+
 export default function CarouselModal({ collection, index, onIndex, onClose }) {
   useLockBodyScroll(true)
+  const [direction, setDirection] = useState(0)
   const closeRef = useRef(null)
   const thumbsRef = useRef(null)
   const items = collection.items
   const item = items[index]
 
   const go = useCallback(
-    (dir) => onIndex((index + dir + items.length) % items.length),
+    (dir) => {
+      setDirection(dir)
+      onIndex((index + dir + items.length) % items.length)
+    },
     [index, items.length, onIndex]
   )
 
@@ -119,10 +149,10 @@ export default function CarouselModal({ collection, index, onIndex, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-label={collection.title}
-        initial={{ opacity: 0, y: 24, scale: 0.99 }}
+        initial={{ opacity: 0, y: 24, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 16, scale: 0.99 }}
-        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+        exit={{ opacity: 0, y: 16, scale: 0.98 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="lightbox__bar">
           <div className="lightbox__meta">
@@ -131,34 +161,82 @@ export default function CarouselModal({ collection, index, onIndex, onClose }) {
           </div>
           <div className="lightbox__right">
             <span className="lightbox__count"><b>{index + 1}</b> / {items.length}</span>
-            <button className="modal__close" onClick={onClose} aria-label="Close" ref={closeRef} style={{ position: 'static' }}>
+            <motion.button
+              className="modal__close"
+              onClick={onClose}
+              aria-label="Close"
+              ref={closeRef}
+              style={{ position: 'static' }}
+              whileHover={{ rotate: 90, scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+            >
               <X size={22} />
-            </button>
+            </motion.button>
           </div>
         </div>
 
         <div className="lightbox__stage">
           {items.length > 1 && (
-            <button className="lb-arrow lb-arrow--prev" onClick={() => go(-1)} aria-label="Previous"><ChevronLeft /></button>
+            <motion.button
+              className="lb-arrow lb-arrow--prev"
+              onClick={() => go(-1)}
+              aria-label="Previous"
+              whileHover={{ scale: 1.12 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+            >
+              <ChevronLeft />
+            </motion.button>
           )}
-          <Stage item={item} key={index} />
+
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={index}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              style={{ width: '100%', height: '100%', display: 'grid', placeItems: 'center' }}
+            >
+              <Stage item={item} />
+            </motion.div>
+          </AnimatePresence>
+
           {items.length > 1 && (
-            <button className="lb-arrow lb-arrow--next" onClick={() => go(1)} aria-label="Next"><ChevronRight /></button>
+            <motion.button
+              className="lb-arrow lb-arrow--next"
+              onClick={() => go(1)}
+              aria-label="Next"
+              whileHover={{ scale: 1.12 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+            >
+              <ChevronRight />
+            </motion.button>
           )}
         </div>
 
         {items.length > 1 && (
           <div className="lb-thumbs" ref={thumbsRef}>
             {items.map((it, i) => (
-              <button
+              <motion.button
                 key={i}
+                layout
                 className={`lb-thumb ${i === index ? 'is-active' : ''}`}
-                onClick={() => onIndex(i)}
+                onClick={() => {
+                  setDirection(i > index ? 1 : -1)
+                  onIndex(i)
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                 aria-label={`View ${it.title}`}
               >
                 {it.poster ? <img src={it.poster} alt="" loading="lazy" /> : <span className="lb-thumb__ph"><Box /></span>}
                 {it.type !== 'image' && <span className="lb-thumb__badge"><ThumbIcon type={it.type} /></span>}
-              </button>
+              </motion.button>
             ))}
           </div>
         )}
@@ -166,3 +244,4 @@ export default function CarouselModal({ collection, index, onIndex, onClose }) {
     </motion.div>
   )
 }
+

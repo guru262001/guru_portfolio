@@ -1,17 +1,63 @@
-import React, { useState } from "react";
-import "./Photo.css";
+import React, { useState } from 'react'
+import { motion } from 'framer-motion'
+import './Photo.css'
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 26 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
+}
+
+const statsContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.3,
+    },
+  },
+}
+
+const statItemVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+  },
+}
 
 const Photo = () => {
-  // fade the loop in only once it actually plays, so a slow network never pops
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(false)
 
   return (
-    <section className="photo-hero">
-
+    <section className="photo-hero" id="work">
       {/* Background still, with an optional loop layered over it */}
-      <div className="hero-image">
+      <motion.div
+        className="hero-image"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+      >
         <video
-          className={`hero-video ${playing ? "is-playing" : ""}`}
+          className={`hero-video ${playing ? 'is-playing' : ''}`}
           autoPlay
           muted
           loop
@@ -21,46 +67,56 @@ const Photo = () => {
         >
           <source src="/hero-loop.mp4" type="video/mp4" />
         </video>
-      </div>
+      </motion.div>
 
       {/* Dark Overlay */}
       <div className="hero-overlay" />
 
       {/* Main Content */}
       <div className="hero-container">
-
-        <div className="hero-content">
-
+        <motion.div
+          className="hero-content"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {/* Small Label */}
-          <div className="hero-eyebrow">
+          <motion.div className="hero-eyebrow" variants={itemVariants}>
             ARCHITECTURE. INTERIORS. ANIMATION.
-          </div>
+          </motion.div>
 
           {/* Heading */}
-          <h1 className="hero-title">
+          <motion.h1 className="hero-title" variants={itemVariants}>
             Bringing Spaces
             <br />
             to <span>Life.</span>
-          </h1>
+          </motion.h1>
 
           {/* Description */}
-          <p className="hero-description">
+          <motion.p className="hero-description" variants={itemVariants}>
             I create <strong>immersive architectural visuals</strong> that bring design
             intent to life &mdash; combining refined composition, realistic materials,
             lighting and atmosphere to convey spaces with clarity and impact.
-          </p>
+          </motion.p>
 
           {/* Buttons */}
-          <div className="hero-buttons">
-
-            <a href="#work" className="hero-btn hero-btn-primary">
+          <motion.div className="hero-buttons" variants={itemVariants}>
+            <motion.a
+              href="#gallery"
+              className="hero-btn hero-btn-primary"
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+            >
               <span>View selected work</span>
-
-              <svg
+              <motion.svg
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
                 fill="none"
+                whileHover={{ x: 3 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
               >
                 <path
                   d="M5 12H19M13 6L19 12L13 18"
@@ -69,11 +125,16 @@ const Photo = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-              </svg>
-            </a>
+              </motion.svg>
+            </motion.a>
 
-            <a href="#contact" className="hero-btn hero-btn-secondary">
-
+            <motion.a
+              href="#contact"
+              className="hero-btn hero-btn-secondary"
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+            >
               <svg
                 className="spark-icon"
                 width="22"
@@ -87,7 +148,6 @@ const Photo = () => {
                   strokeWidth="1.5"
                   strokeLinejoin="round"
                 />
-
                 <path
                   d="M19 16L19.8 18.2L22 19L19.8 19.8L19 22L18.2 19.8L16 19L18.2 18.2L19 16Z"
                   stroke="currentColor"
@@ -95,20 +155,26 @@ const Photo = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-
               <span>Start a project</span>
-            </a>
-
-          </div>
-
-        </div>
+            </motion.a>
+          </motion.div>
+        </motion.div>
 
         {/* Statistics */}
-        <div className="hero-stats">
-
+        <motion.div
+          className="hero-stats"
+          variants={statsContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {/* Stat 1 */}
-          <div className="hero-stat">
-
+          <motion.div
+            className="hero-stat"
+            variants={statItemVariants}
+            whileHover={{ y: -4, scale: 1.02 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+          >
             <div className="stat-icon">
               <svg
                 width="30"
@@ -121,13 +187,11 @@ const Photo = () => {
                   stroke="currentColor"
                   strokeWidth="1.6"
                 />
-
                 <path
                   d="M5 9.2L16 16L27 9.2"
                   stroke="currentColor"
                   strokeWidth="1.6"
                 />
-
                 <path
                   d="M16 16V29"
                   stroke="currentColor"
@@ -135,19 +199,21 @@ const Photo = () => {
                 />
               </svg>
             </div>
-
             <div className="stat-text">
               <strong>20+</strong>
               <span>Projects completed</span>
             </div>
-
-          </div>
+          </motion.div>
 
           <div className="stat-divider" />
 
           {/* Stat 2 */}
-          <div className="hero-stat">
-
+          <motion.div
+            className="hero-stat"
+            variants={statItemVariants}
+            whileHover={{ y: -4, scale: 1.02 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+          >
             <div className="stat-icon">
               <svg
                 width="31"
@@ -164,14 +230,12 @@ const Photo = () => {
                   stroke="currentColor"
                   strokeWidth="1.7"
                 />
-
                 <path
                   d="M10 9L12 5H20L22 9"
                   stroke="currentColor"
                   strokeWidth="1.7"
                   strokeLinecap="round"
                 />
-
                 <circle
                   cx="16"
                   cy="18"
@@ -179,7 +243,6 @@ const Photo = () => {
                   stroke="currentColor"
                   strokeWidth="1.7"
                 />
-
                 <circle
                   cx="16"
                   cy="18"
@@ -188,19 +251,21 @@ const Photo = () => {
                 />
               </svg>
             </div>
-
             <div className="stat-text">
               <strong>50+</strong>
               <span>High-quality renders</span>
             </div>
-
-          </div>
+          </motion.div>
 
           <div className="stat-divider" />
 
           {/* Stat 3 */}
-          <div className="hero-stat">
-
+          <motion.div
+            className="hero-stat"
+            variants={statItemVariants}
+            whileHover={{ y: -4, scale: 1.02 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+          >
             <div className="stat-icon">
               <svg
                 width="31"
@@ -215,7 +280,6 @@ const Photo = () => {
                   stroke="currentColor"
                   strokeWidth="1.7"
                 />
-
                 <path
                   d="M13 11L21 16L13 21V11Z"
                   stroke="currentColor"
@@ -224,20 +288,15 @@ const Photo = () => {
                 />
               </svg>
             </div>
-
             <div className="stat-text">
               <strong>8</strong>
               <span>Walkthrough animations</span>
             </div>
-
-          </div>
-
-        </div>
-
+          </motion.div>
+        </motion.div>
       </div>
-
     </section>
-  );
-};
+  )
+}
 
-export default Photo;
+export default Photo

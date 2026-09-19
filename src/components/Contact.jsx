@@ -1,6 +1,7 @@
+import { motion } from 'framer-motion'
 import { Mail, Phone, Linkedin, MapPin, ArrowUpRight, Quote } from 'lucide-react'
 import Reveal from './Reveal'
-import contactImage from '../designs/Interior/Foyer GGR 02.jpg'
+import contactImage from '../designs/Residential Interiors/Foyer GGR 02.jpg'
 
 const METHODS = [
   { icon: <Mail />, k: 'Email', v: 'guru3d.archviz@gmail.com', href: 'mailto:guru3d.archviz@gmail.com' },
@@ -8,6 +9,26 @@ const METHODS = [
   { icon: <Linkedin />, k: 'LinkedIn', v: 'guru3darchviz', href: 'https://linkedin.com/in/guru3darchviz' },
   { icon: <MapPin />, k: 'Based in', v: 'Vellore / Chennai, TN', href: null },
 ]
+
+const methodsContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
+}
+
+const methodItemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+  },
+}
 
 export default function Contact() {
   return (
@@ -28,12 +49,26 @@ export default function Contact() {
               </p>
 
               <div className="contact__actions">
-                <a href="mailto:guru3d.archviz@gmail.com" className="btn btn--primary">
+                <motion.a
+                  href="mailto:guru3d.archviz@gmail.com"
+                  className="btn btn--primary"
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                >
                   <Mail /> Email Guru <ArrowUpRight />
-                </a>
-                <a href="https://linkedin.com/in/guru3darchviz" target="_blank" rel="noreferrer" className="btn btn--ghost">
+                </motion.a>
+                <motion.a
+                  href="https://linkedin.com/in/guru3darchviz"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn--ghost"
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                >
                   <Linkedin /> Connect on LinkedIn
-                </a>
+                </motion.a>
               </div>
             </div>
 
@@ -51,7 +86,13 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="contact__methods">
+          <motion.div
+            className="contact__methods"
+            variants={methodsContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {METHODS.map((m) => {
               const Inner = (
                 <>
@@ -62,15 +103,33 @@ export default function Contact() {
                   </span>
                 </>
               )
+              const props = {
+                className: 'method',
+                variants: methodItemVariants,
+                whileHover: { x: 6, y: -2, borderColor: 'var(--gold-line)' },
+                whileTap: { scale: 0.98 },
+                transition: { type: 'spring', stiffness: 400, damping: 22 },
+              }
               return m.href ? (
-                <a className="method" key={m.k} href={m.href} target={m.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{Inner}</a>
+                <motion.a
+                  key={m.k}
+                  href={m.href}
+                  target={m.href.startsWith('http') ? '_blank' : undefined}
+                  rel="noreferrer"
+                  {...props}
+                >
+                  {Inner}
+                </motion.a>
               ) : (
-                <div className="method" key={m.k}>{Inner}</div>
+                <motion.div key={m.k} {...props}>
+                  {Inner}
+                </motion.div>
               )
             })}
-          </div>
+          </motion.div>
         </Reveal>
       </div>
     </section>
   )
 }
+

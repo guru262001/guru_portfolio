@@ -1,5 +1,6 @@
 import { Suspense, lazy, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
+import ScrollProgress from './components/ScrollProgress'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
@@ -19,6 +20,7 @@ export default function App() {
 
   return (
     <>
+      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />

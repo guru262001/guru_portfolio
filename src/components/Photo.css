@@ -12,6 +12,10 @@
   /* ponytail: no own slab — the page background shows through, so no seam */
   background: transparent;
   color: #fff;
+
+  /* Shift Work section down: clears 74px navbar and gives generous headroom */
+  scroll-margin-top: 85px;
+  padding-top: 24px;
 }
 
 
@@ -21,25 +25,84 @@
 
 .hero-image {
   position: absolute;
-  top: 0;
+  top: 36px;
   right: 0;
   bottom: 0;
 
   width: 65%;
 
-  background-image: url("../designs/Appartment/Commercial Building NV 02.jpg");
+  background-image: url("../designs/Commercial Exteriors/Commercial Building NV 02.jpg");
   background-size: cover;
-  background-position: center center;
+  background-position: center top;
   background-repeat: no-repeat;
 
-  /* ponytail: two masks intersected — the image reaches zero at its own left edge,
-     so there is no opacity step for the overlay to leave as a visible line */
+  /* Eased, multi-stop scrim mask: smooth 90px atmospheric top gradient that blends seamlessly into the dark background */
   -webkit-mask-image:
-    linear-gradient(180deg, transparent, #000 18%, #000 76%, transparent),
-    linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.25) 20%, rgba(0, 0, 0, 0.75) 42%, #000 62%);
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.02) 8px,
+      rgba(0, 0, 0, 0.06) 16px,
+      rgba(0, 0, 0, 0.14) 26px,
+      rgba(0, 0, 0, 0.26) 36px,
+      rgba(0, 0, 0, 0.42) 48px,
+      rgba(0, 0, 0, 0.60) 60px,
+      rgba(0, 0, 0, 0.78) 72px,
+      rgba(0, 0, 0, 0.90) 80px,
+      rgba(0, 0, 0, 0.97) 86px,
+      #000 90px,
+      #000 calc(100% - 150px),
+      rgba(0, 0, 0, 0.94) calc(100% - 125px),
+      rgba(0, 0, 0, 0.80) calc(100% - 95px),
+      rgba(0, 0, 0, 0.55) calc(100% - 65px),
+      rgba(0, 0, 0, 0.25) calc(100% - 35px),
+      rgba(0, 0, 0, 0.05) calc(100% - 12px),
+      transparent 100%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.02) 6%,
+      rgba(0, 0, 0, 0.08) 14%,
+      rgba(0, 0, 0, 0.22) 23%,
+      rgba(0, 0, 0, 0.44) 34%,
+      rgba(0, 0, 0, 0.70) 46%,
+      rgba(0, 0, 0, 0.90) 58%,
+      #000 68%
+    );
   mask-image:
-    linear-gradient(180deg, transparent, #000 18%, #000 76%, transparent),
-    linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.25) 20%, rgba(0, 0, 0, 0.75) 42%, #000 62%);
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.02) 8px,
+      rgba(0, 0, 0, 0.06) 16px,
+      rgba(0, 0, 0, 0.14) 26px,
+      rgba(0, 0, 0, 0.26) 36px,
+      rgba(0, 0, 0, 0.42) 48px,
+      rgba(0, 0, 0, 0.60) 60px,
+      rgba(0, 0, 0, 0.78) 72px,
+      rgba(0, 0, 0, 0.90) 80px,
+      rgba(0, 0, 0, 0.97) 86px,
+      #000 90px,
+      #000 calc(100% - 150px),
+      rgba(0, 0, 0, 0.94) calc(100% - 125px),
+      rgba(0, 0, 0, 0.80) calc(100% - 95px),
+      rgba(0, 0, 0, 0.55) calc(100% - 65px),
+      rgba(0, 0, 0, 0.25) calc(100% - 35px),
+      rgba(0, 0, 0, 0.05) calc(100% - 12px),
+      transparent 100%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.02) 6%,
+      rgba(0, 0, 0, 0.08) 14%,
+      rgba(0, 0, 0, 0.22) 23%,
+      rgba(0, 0, 0, 0.44) 34%,
+      rgba(0, 0, 0, 0.70) 46%,
+      rgba(0, 0, 0, 0.90) 58%,
+      #000 68%
+    );
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
 
@@ -48,7 +111,7 @@
 
 
 /* =========================================
-   LEFT DARK GRADIENT
+   DARK GRADIENT OVERLAY (Left Edge Blend)
 ========================================= */
 
 .hero-overlay {
@@ -87,7 +150,7 @@
 
   margin: 0 auto;
 
-  padding: 100px 42px 45px;
+  padding: 80px 42px 45px;
 
   display: flex;
   flex-direction: column;
@@ -480,6 +543,7 @@
   height: 100%;
 
   object-fit: cover;
+  object-position: center top;
 
   /* atmosphere, not the subject — the copy stays the loudest thing on screen */
   opacity: 0;
