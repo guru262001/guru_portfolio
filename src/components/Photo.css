@@ -26,15 +26,16 @@
 .hero-image {
   position: absolute;
   top: 36px;
-  right: 0;
+  right: -155px;
   bottom: 0;
 
-  width: 65%;
+  width: 60%;
 
   background-image: url("../designs/Commercial Exteriors/Commercial Building NV 02.jpg");
   background-size: cover;
-  background-position: center top;
+  background-position: right top;
   background-repeat: no-repeat;
+  
 
   /* Eased, multi-stop scrim mask: smooth 90px atmospheric top gradient that blends seamlessly into the dark background */
   -webkit-mask-image:
@@ -68,7 +69,11 @@
       rgba(0, 0, 0, 0.44) 34%,
       rgba(0, 0, 0, 0.70) 46%,
       rgba(0, 0, 0, 0.90) 58%,
-      #000 68%
+      #000 68%,
+      #000 calc(100% - 40px),
+      rgba(0, 0, 0, 0.85) calc(100% - 20px),
+      rgba(0, 0, 0, 0.30) calc(100% - 6px),
+      transparent 100%
     );
   mask-image:
     linear-gradient(
@@ -101,12 +106,17 @@
       rgba(0, 0, 0, 0.44) 34%,
       rgba(0, 0, 0, 0.70) 46%,
       rgba(0, 0, 0, 0.90) 58%,
-      #000 68%
+      #000 68%,
+      #000 calc(100% - 40px),
+      rgba(0, 0, 0, 0.85) calc(100% - 20px),
+      rgba(0, 0, 0, 0.30) calc(100% - 6px),
+      transparent 100%
     );
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
 
   z-index: 0;
+  
 }
 
 
@@ -126,17 +136,17 @@
     linear-gradient(
       90deg,
       var(--bg) 0%,
-      var(--bg) 30%,
-      rgba(10, 11, 13, 0.86) 40%,
-      rgba(10, 11, 13, 0.55) 50%,
-      rgba(10, 11, 13, 0.18) 63%,
-      rgba(10, 11, 13, 0) 78%
+      var(--bg) 35%,
+      rgba(10, 11, 13, 0.88) 45%,
+      rgba(10, 11, 13, 0.55) 55%,
+      rgba(10, 11, 13, 0.18) 66%,
+      rgba(10, 11, 13, 0) 80%
     );
 }
 
 
 /* =========================================
-   CONTAINER
+   CONTAINER (Uniform with Hero & Site)
 ========================================= */
 
 .hero-container {
@@ -144,13 +154,13 @@
   z-index: 2;
 
   width: 100%;
-  max-width: 1600px;
+  max-width: var(--maxw);
 
   min-height: calc(90vh - 70px);
 
   margin: 0 auto;
 
-  padding: 80px 42px 45px;
+  padding: 80px 28px 45px;
 
   display: flex;
   flex-direction: column;
@@ -163,8 +173,8 @@
 ========================================= */
 
 .hero-content {
-  width: 43%;
-  max-width: 620px;
+  width: 48%;
+  max-width: 560px;
 }
 
 
