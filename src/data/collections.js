@@ -104,6 +104,31 @@ for (const [folder, entries] of folders) {
   })
 }
 
+// Second pass: create collections for PUBLIC_VIDEOS folders that had no glob-discovered files
+const existingIds = new Set(COLLECTIONS.map((c) => c.id))
+for (const [folder, vids] of Object.entries(PUBLIC_VIDEOS)) {
+  if (!vids.length) continue
+  const id = slug(folder)
+  if (existingIds.has(id)) continue // already created above
+  const meta = DESIGN_META[folder] || {}
+  const items = vids.map((v) => ({ type: 'video', ...v }))
+  const coverVideo = items[0]?.src ?? null
+  COLLECTIONS.push({
+    id,
+    title: meta.title || folder,
+    kind: '2D',
+    cover: null,
+    coverVideo,
+    category: meta.category || 'Motion · Real-Time Animation',
+    count: items.length,
+    models: 0,
+    photos: 0,
+    videos: items.length,
+    description: meta.description || '',
+    items,
+  })
+}
+
 // Strictly order the 8 folders as requested: 1 to 8
 COLLECTIONS.sort(
   (a, b) =>
