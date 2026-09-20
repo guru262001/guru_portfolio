@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import './Photo.css'
 
@@ -44,7 +44,6 @@ const statItemVariants = {
 }
 
 const Photo = () => {
-  const [playing, setPlaying] = useState(false)
 
   return (
     <section className="photo-hero" id="work">
@@ -55,19 +54,7 @@ const Photo = () => {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <video
-          className={`hero-video ${playing ? 'is-playing' : ''}`}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          onPlaying={() => setPlaying(true)}
-        >
-          <source src="/hero-loop.mp4" type="video/mp4" />
-        </video>
-      </motion.div>
+      />
 
       {/* Dark Overlay */}
       <div className="hero-overlay" />
