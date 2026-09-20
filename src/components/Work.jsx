@@ -83,6 +83,8 @@ export default function Work({ onOpenCollection }) {
                   <div className="card__media">
                     {c.cover ? (
                       <img src={c.cover} alt={c.title} loading="lazy" />
+                    ) : c.coverYoutube ? (
+                      <img src={`https://img.youtube.com/vi/${c.coverYoutube.match(/(?:youtu\.be\/|watch\?v=)([^?&/#]+)/)?.[1]}/maxresdefault.jpg`} alt={c.title} loading="lazy" />
                     ) : c.coverVideo ? (
                       <video src={`${c.coverVideo}#t=3`} preload="metadata" muted playsInline tabIndex={-1} onLoadedMetadata={(e) => { e.target.currentTime = 3 }} />
                     ) : (

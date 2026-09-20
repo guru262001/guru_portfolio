@@ -47,6 +47,25 @@ function Stage({ item }) {
     )
   }
 
+  if (item.type === 'youtube') {
+    const videoId = item.src.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([^?&/#]+)/)?.[1]
+    return (
+      <div className="lightbox__media" style={{ background: '#000' }}>
+        {videoId ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
+            title={item.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{ width: '100%', height: '100%', border: 'none' }}
+          />
+        ) : (
+          <div className="video-empty__note"><p style={{ color: 'var(--text-mut)' }}>Invalid YouTube URL</p></div>
+        )}
+      </div>
+    )
+  }
+
   if (item.type === 'video') {
     return (
       <div className="lightbox__media">

@@ -4,18 +4,38 @@
    Each folder inside src/designs/ becomes a collection card with a cover
    thumbnail. Clicking it opens a carousel of everything inside.
 
-   LARGE VIDEOS: Videos >10 MB live in public/videos/ and are referenced
-   via PUBLIC_VIDEOS below (served as static files, NOT bundled by Vite).
+   YOUTUBE VIDEOS: Paste your YouTube URL in PUBLIC_VIDEOS below.
+   Supports:  https://youtu.be/VIDEO_ID
+              https://www.youtube.com/watch?v=VIDEO_ID
    ============================================================ */
 import { DESIGN_META } from './designMeta.js'
 
-// Map of  collectionFolderName → array of public video items
-// Each item: { src: '/videos/file.mp4', poster: null, title: 'My Walkthrough' }
+// ─── PASTE YOUR YOUTUBE LINKS HERE ───────────────────────────────────────────
+// Add one entry per video. title = label shown in the carousel.
 const PUBLIC_VIDEOS = {
   'Walkthroughs & Animation': [
-    { src: '/videos/04.mp4', poster: null, title: 'Walkthrough 01' },
-    { src: '/videos/walkthrough_01.mp4', poster: null, title: 'Walkthrough 02' },
+    { type: 'youtube', src: 'https://youtu.be/48aN_wgShak', title: 'Luxury Interior' },
+    // { type: 'youtube', src: 'https://youtu.be/ANOTHER_ID', title: 'Walkthrough 02' },
   ],
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Extract YouTube video ID from any YouTube URL format
+export function getYouTubeId(url) {
+  const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([^?&/#]+)/)
+  return m ? m[1] : null
+}
+
+// Get the best available thumbnail for a YouTube video
+export function getYouTubeThumbnail(url) {
+  const id = getYouTubeId(url)
+  return id ? `https://img.youtube.com/vi/${id}/maxresdefault.jpg` : null
+}
+
+// Get the embed URL (with autoplay + rel=0 to hide suggestions)
+export function getYouTubeEmbed(url) {
+  const id = getYouTubeId(url)
+  return id ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1` : null
 }
 
 const files = import.meta.glob(
@@ -73,9 +93,12 @@ for (const [folder, entries] of folders) {
     else if (image) items.push({ type: 'image', src: image.url, poster: image.url, title })
   }
 
-  // Inject public (unbundled) videos for this collection
+  // Inject public/YouTube videos for this collection
   const publicVids = PUBLIC_VIDEOS[folder] || []
-  for (const v of publicVids) items.unshift({ type: 'video', ...v })
+  for (const v of publicVids) {
+    const poster = v.type === 'youtube' ? getYouTubeThumbnail(v.src) : (v.poster || null)
+    items.unshift({ ...v, poster })
+  }
 
   if (!items.length) continue
 
@@ -85,7 +108,8 @@ for (const [folder, entries] of folders) {
   const has3D = items.some((i) => i.type === 'model')
   const kind = has3D ? '3D' : '2D'
   const cover = coverEntry?.url || items.find((i) => i.poster)?.poster || null
-  const coverVideo = cover ? null : items.find((i) => i.type === 'video')?.src ?? null
+  const coverYoutube = !cover ? items.find((i) => i.type === 'youtube')?.src ?? null : null
+  const coverVideo = !cover && !coverYoutube ? items.find((i) => i.type === 'video')?.src ?? null : null
   const meta = DESIGN_META[folder] || DESIGN_META[titleCase(folder)] || {}
   const title = meta.title || folder
 
@@ -95,11 +119,12 @@ for (const [folder, entries] of folders) {
     kind,
     cover,
     coverVideo,
+    coverYoutube,
     category: meta.category || (has3D ? 'Interactive 3D' : 'Architectural Visualization'),
     count: items.length,
     models: items.filter((i) => i.type === 'model').length,
     photos: items.filter((i) => i.type === 'image').length,
-    videos: items.filter((i) => i.type === 'video').length,
+    videos: items.filter((i) => i.type === 'video' || i.type === 'youtube').length,
     description: meta.description || '',
     items,
   })
@@ -112,14 +137,21 @@ for (const [folder, vids] of Object.entries(PUBLIC_VIDEOS)) {
   const id = slug(folder)
   if (existingIds.has(id)) continue // already created above
   const meta = DESIGN_META[folder] || {}
-  const items = vids.map((v) => ({ type: 'video', ...v }))
-  const coverVideo = items[0]?.src ?? null
+  const items = vids.map((v) => ({
+    ...v,
+    poster: v.type === 'youtube' ? getYouTubeThumbnail(v.src) : (v.poster || null),
+  }))
+  const firstYoutube = items.find((i) => i.type === 'youtube')
+  const coverYoutube = firstYoutube?.src ?? null
+  const cover = items.find((i) => i.poster)?.poster ?? null
+  const coverVideo = !coverYoutube ? items.find((i) => i.type === 'video')?.src ?? null : null
   COLLECTIONS.push({
     id,
     title: meta.title || folder,
     kind: '2D',
-    cover: null,
+    cover,
     coverVideo,
+    coverYoutube,
     category: meta.category || 'Motion · Real-Time Animation',
     count: items.length,
     models: 0,
