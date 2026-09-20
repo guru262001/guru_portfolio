@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { GraduationCap } from 'lucide-react'
 import Reveal from './Reveal'
-import auraImage from '../designs/Residential Exteriors/Villa View 01.jpg'
+import auraImage from '../designs/Residential Exteriors/10.jpg'
 
 const EDU = [
   {

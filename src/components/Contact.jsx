@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Mail, Phone, Linkedin, MapPin, ArrowUpRight, Quote } from 'lucide-react'
 import Reveal from './Reveal'
-import contactImage from '../designs/Residential Interiors/Foyer GGR 02.jpg'
+import contactImage from '../designs/Residential Interiors/03.jpg'
 
 const METHODS = [
   { icon: <Mail />, k: 'Email', v: 'guru3d.archviz@gmail.com', href: 'mailto:guru3d.archviz@gmail.com' },
