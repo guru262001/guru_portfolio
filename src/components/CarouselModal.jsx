@@ -51,7 +51,7 @@ function Stage({ item }) {
     return (
       <div className="lightbox__media">
         {item.src ? (
-          <video src={item.src} poster={item.poster} controls autoPlay playsInline />
+          <video src={item.src} poster={item.poster} controls autoPlay playsInline muted onCanPlay={(e) => e.target.play().catch(() => {})} />
         ) : (
           <div className="video-empty">
             {item.poster && <img src={item.poster} alt="" aria-hidden="true" />}

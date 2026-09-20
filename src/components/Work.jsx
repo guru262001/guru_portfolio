@@ -84,7 +84,7 @@ export default function Work({ onOpenCollection }) {
                     {c.cover ? (
                       <img src={c.cover} alt={c.title} loading="lazy" />
                     ) : c.coverVideo ? (
-                      <video src={`${c.coverVideo}#t=2`} preload="metadata" muted playsInline tabIndex={-1} />
+                      <video src={`${c.coverVideo}#t=3`} preload="metadata" muted playsInline tabIndex={-1} onLoadedMetadata={(e) => { e.target.currentTime = 3 }} />
                     ) : (
                       <div className="card__noimg"><Box /><span>3D Collection</span></div>
                     )}
