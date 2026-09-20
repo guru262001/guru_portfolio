@@ -13,7 +13,8 @@ import { DESIGN_META } from './designMeta.js'
 // Each item: { src: '/videos/file.mp4', poster: null, title: 'My Walkthrough' }
 const PUBLIC_VIDEOS = {
   'Walkthroughs & Animation': [
-    { src: '/videos/walkthrough_01.mp4', poster: null, title: 'Walkthrough 01' },
+    { src: '/videos/04.mp4', poster: null, title: 'Walkthrough 01' },
+    { src: '/videos/walkthrough_01.mp4', poster: null, title: 'Walkthrough 02' },
   ],
 }
 
