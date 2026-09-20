@@ -14,7 +14,10 @@ import { DESIGN_META } from './designMeta.js'
 // Add one entry per video. title = label shown in the carousel.
 const PUBLIC_VIDEOS = {
   'Walkthroughs & Animation': [
+    { type: 'youtube', src: 'https://youtu.be/2BM2Odu0Qn0', title: 'House Walkthrough' },
     { type: 'youtube', src: 'https://youtu.be/48aN_wgShak', title: 'Luxury Interior' },
+    // { type: 'youtube', src: 'https://youtu.be/48aN_wgShak', title: 'House Walkthrough' },
+    // { type: 'youtube', src: 'https://youtu.be/48aN_wgShak', title: 'House Walkthrough' },
     // { type: 'youtube', src: 'https://youtu.be/ANOTHER_ID', title: 'Walkthrough 02' },
   ],
 }
