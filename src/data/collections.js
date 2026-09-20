@@ -3,16 +3,26 @@
    ------------------------------------------------------------
    Each folder inside src/designs/ becomes a collection card with a cover
    thumbnail. Clicking it opens a carousel of everything inside.
+
+   LARGE VIDEOS: Videos >10 MB live in public/videos/ and are referenced
+   via PUBLIC_VIDEOS below (served as static files, NOT bundled by Vite).
    ============================================================ */
 import { DESIGN_META } from './designMeta.js'
 
+// Map of  collectionFolderName → array of public video items
+// Each item: { src: '/videos/file.mp4', poster: null, title: 'My Walkthrough' }
+const PUBLIC_VIDEOS = {
+  'Walkthroughs & Animation': [
+    { src: '/videos/walkthrough_01.mp4', poster: null, title: 'Walkthrough 01' },
+  ],
+}
+
 const files = import.meta.glob(
-  '../designs/**/*.{glb,gltf,jpg,jpeg,png,webp,avif,svg,mp4,webm}',
+  '../designs/**/*.{glb,gltf,jpg,jpeg,png,webp,avif,svg}',
   { eager: true, query: '?url', import: 'default' }
 )
 
 const isModel = (e) => /^(glb|gltf)$/i.test(e)
-const isVideo = (e) => /^(mp4|webm)$/i.test(e)
 const isImage = (e) => /^(jpe?g|png|webp|avif|svg)$/i.test(e)
 
 const pretty = (s) => s.replace(/_+/g, ' ').replace(/\s+/g, ' ').trim()
@@ -56,13 +66,16 @@ for (const [folder, entries] of folders) {
   const items = []
   for (const [base, es] of byBase) {
     const model = es.find((e) => isModel(e.ext))
-    const video = es.find((e) => isVideo(e.ext))
     const image = es.find((e) => isImage(e.ext))
     const title = titleCase(base)
     if (model) items.push({ type: 'model', src: model.url, poster: image?.url ?? null, title })
-    else if (video) items.push({ type: 'video', src: video.url, poster: image?.url ?? null, title })
     else if (image) items.push({ type: 'image', src: image.url, poster: image.url, title })
   }
+
+  // Inject public (unbundled) videos for this collection
+  const publicVids = PUBLIC_VIDEOS[folder] || []
+  for (const v of publicVids) items.unshift({ type: 'video', ...v })
+
   if (!items.length) continue
 
   // models first (showcase), then photos in name order
