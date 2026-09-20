@@ -25,98 +25,66 @@
 
 .hero-image {
   position: absolute;
-  top: 36px;
+  top: 0;
   right: calc(-1 * min(155px, max(0px, (100vw - var(--maxw)) * 0.22)));
   bottom: 0;
 
-  width: 50%;
+  width: 70%;
+  margin-right: -80px;
 
   background-image: url("../designs/Commercial Exteriors/01.jpg");
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  margin-right: 50px;
-  
 
-  /* Eased, multi-stop scrim mask: smooth 90px atmospheric top gradient that blends seamlessly into the dark background */
-  -webkit-mask-image:
+  /* Gradient fading on top, bottom, and left edge */
+  -webkit-mask-image: 
     linear-gradient(
       180deg,
       transparent 0%,
-      rgba(0, 0, 0, 0.02) 8px,
-      rgba(0, 0, 0, 0.06) 16px,
-      rgba(0, 0, 0, 0.14) 26px,
-      rgba(0, 0, 0, 0.26) 36px,
-      rgba(0, 0, 0, 0.42) 48px,
-      rgba(0, 0, 0, 0.60) 60px,
-      rgba(0, 0, 0, 0.78) 72px,
-      rgba(0, 0, 0, 0.90) 80px,
-      rgba(0, 0, 0, 0.97) 86px,
-      #000 90px,
-      #000 calc(100% - 150px),
-      rgba(0, 0, 0, 0.94) calc(100% - 125px),
-      rgba(0, 0, 0, 0.80) calc(100% - 95px),
-      rgba(0, 0, 0, 0.55) calc(100% - 65px),
-      rgba(0, 0, 0, 0.25) calc(100% - 35px),
-      rgba(0, 0, 0, 0.05) calc(100% - 12px),
+      rgba(0, 0, 0, 0.05) 5%,
+      rgba(0, 0, 0, 0.25) 10%,
+      rgba(0, 0, 0, 0.60) 15%,
+      #000 25%,
+      #000 75%,
+      rgba(0, 0, 0, 0.60) 85%,
+      rgba(0, 0, 0, 0.25) 90%,
+      rgba(0, 0, 0, 0.05) 95%,
       transparent 100%
     ),
     linear-gradient(
       90deg,
       transparent 0%,
-      rgba(0, 0, 0, 0.02) 2%,
-      rgba(0, 0, 0, 0.08) 5%,
-      rgba(0, 0, 0, 0.22) 9%,
-      rgba(0, 0, 0, 0.44) 15%,
-      rgba(0, 0, 0, 0.70) 22%,
-      #000 30%,
-      #000 calc(100% - 40px),
-      rgba(0, 0, 0, 0.85) calc(100% - 20px),
-      rgba(0, 0, 0, 0.30) calc(100% - 6px),
-      transparent 100%
+      rgba(0, 0, 0, 0.5) 5%,
+      #000 12%,
+      #000 100%
     );
-  mask-image:
+  mask-image: 
     linear-gradient(
       180deg,
       transparent 0%,
-      rgba(0, 0, 0, 0.02) 8px,
-      rgba(0, 0, 0, 0.06) 16px,
-      rgba(0, 0, 0, 0.14) 26px,
-      rgba(0, 0, 0, 0.26) 36px,
-      rgba(0, 0, 0, 0.42) 48px,
-      rgba(0, 0, 0, 0.60) 60px,
-      rgba(0, 0, 0, 0.78) 72px,
-      rgba(0, 0, 0, 0.90) 80px,
-      rgba(0, 0, 0, 0.97) 86px,
-      #000 90px,
-      #000 calc(100% - 150px),
-      rgba(0, 0, 0, 0.94) calc(100% - 125px),
-      rgba(0, 0, 0, 0.80) calc(100% - 95px),
-      rgba(0, 0, 0, 0.55) calc(100% - 65px),
-      rgba(0, 0, 0, 0.25) calc(100% - 35px),
-      rgba(0, 0, 0, 0.05) calc(100% - 12px),
+      rgba(0, 0, 0, 0.05) 5%,
+      rgba(0, 0, 0, 0.25) 10%,
+      rgba(0, 0, 0, 0.60) 15%,
+      #000 25%,
+      #000 75%,
+      rgba(0, 0, 0, 0.60) 85%,
+      rgba(0, 0, 0, 0.25) 90%,
+      rgba(0, 0, 0, 0.05) 95%,
       transparent 100%
     ),
     linear-gradient(
       90deg,
       transparent 0%,
-      rgba(0, 0, 0, 0.02) 2%,
-      rgba(0, 0, 0, 0.08) 5%,
-      rgba(0, 0, 0, 0.22) 9%,
-      rgba(0, 0, 0, 0.44) 15%,
-      rgba(0, 0, 0, 0.70) 22%,
-      rgba(0, 0, 0, 0.90) 27%,
-      #000 30%,
-      #000 calc(100% - 40px),
-      rgba(0, 0, 0, 0.85) calc(100% - 20px),
-      rgba(0, 0, 0, 0.30) calc(100% - 6px),
-      transparent 100%
+      rgba(0, 0, 0, 0.5) 5%,
+      #000 12%,
+      #000 100%
     );
+  
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
 
   z-index: 0;
-  
 }
 
 
