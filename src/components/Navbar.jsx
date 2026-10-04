@@ -36,7 +36,7 @@ export default function Navbar() {
           <img className="brand__mark" src={logo} alt="" width="58" height="54" />
           <span>
             <span className="brand__name">Guru Prasath</span>
-            <span className="brand__role">3D Architectural Visualizer</span>
+            {/* <span className="brand__role">3D Architectural Visualizer</span> */}
           </span>
         </motion.a>
 

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
-import { Mail, Phone, Linkedin, MapPin, ArrowUpRight, Quote } from 'lucide-react'
+import { Mail, Phone, Linkedin, MapPin, ArrowUpRight } from 'lucide-react'
 import Reveal from './Reveal'
-import contactImage from '../designs/Residential Interiors/03.jpg'
+import contactImage from '../logos/ContactQuote.jpg'
 
 const METHODS = [
   { icon: <Mail />, k: 'Email', v: 'guru3d.archviz@gmail.com', href: 'mailto:guru3d.archviz@gmail.com' },
@@ -73,16 +73,9 @@ export default function Contact() {
             </div>
 
             <div className="contact__aside">
-              <img src={contactImage} alt="" loading="lazy" />
+              <img src={contactImage} alt="“Great design is not just seen, it’s felt.” — Guru Prasath" loading="lazy" />
               <span className="contact__fade" />
 
-              <blockquote className="contact__quote">
-                <Quote />
-                <p>Great design is not just seen, <em>it&rsquo;s felt.</em></p>
-                <span className="contact__rule" />
-                <span className="contact__sign">Guru Prasath</span>
-                <span className="contact__signrole">3D Architectural Visualizer</span>
-              </blockquote>
             </div>
           </div>
 

@@ -553,3 +553,85 @@
 @media (prefers-reduced-motion: reduce), (max-width: 900px) {
   .hero-video { display: none; }
 }
+
+/* =========================================
+   PHONE POLISH — image becomes a banner that fades into the copy.
+   Phone/tablet only (≤768px); laptop rules above are untouched.
+========================================= */
+
+@media (max-width: 768px) {
+  .photo-hero { min-height: 0; padding-top: 0; scroll-margin-top: 64px; }
+
+  .hero-image {
+    top: 0; bottom: auto; left: 0; right: 0;
+    width: 100%; height: min(62vw, 360px); margin: 0;
+    background-position: center;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 55%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 55%, transparent 100%);
+    -webkit-mask-composite: source-over;
+    mask-composite: add;
+  }
+  .hero-overlay { display: none; }
+
+  .hero-container { min-height: 0; padding: min(44vw, 250px) 22px 44px; }
+  .hero-content { max-width: none; text-align: center; }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 3px; margin-bottom: 14px; }
+  .hero-title { font-size: clamp(42px, 12.5vw, 64px); letter-spacing: -2px; }
+  .hero-description { margin: 18px auto 26px; font-size: 15px; }
+  .hero-btn { height: 46px; padding: 0 20px; font-size: 14px; gap: 10px; }
+  .hero-btn-primary, .hero-btn-secondary { min-width: 0; }
+
+  .hero-stats {
+    margin-top: 36px; padding: 20px 8px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border: 1px solid var(--line-strong); border-radius: 18px;
+    background: linear-gradient(180deg, rgba(20,23,29,0.82), rgba(14,16,20,0.7));
+  }
+  .hero-stat { min-width: 0; flex-direction: column; text-align: center; gap: 8px; padding: 0 4px; }
+  .stat-icon { width: 30px; height: 30px; }
+  .stat-icon svg { width: 26px; height: 26px; }
+  .stat-text { align-items: center; gap: 4px; }
+  .stat-text strong { font-size: 24px; }
+  .stat-text span { font-size: 11px; white-space: normal; }
+  .stat-divider { display: block; width: 1px; height: auto; align-self: stretch; margin: 0; }
+}
+
+@media (max-width: 768px) {
+  .hero-buttons { gap: 10px; }
+  .hero-btn { height: 46px; font-size: 14px; padding: 0 18px; }
+  .hero-stats { grid-template-columns: 1fr 1px 1fr 1px 1fr; margin-top: 26px; padding: 14px 4px; border-radius: 16px; }
+  .hero-stat { gap: 6px; padding: 0 2px; }
+  .stat-icon, .stat-icon svg { width: 22px; height: 22px; }
+  .stat-text strong { font-size: 20px; }
+  .stat-text span { font-size: 10px; }
+  .hero-container { padding-bottom: 28px; }
+}
+
+/* phone type scale — title lines stay whole, copy starts below the banner */
+@media (max-width: 768px) {
+  .hero-container { padding-top: calc(min(62vw, 360px) + 4px); }
+  .hero-title { font-size: clamp(30px, 9.6vw, 56px); letter-spacing: -1.5px; white-space: nowrap; }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 2.5px; }
+  .hero-description { font-size: 14.5px; line-height: 1.6; margin: 14px auto 22px; }
+  .hero-btn { font-size: 14px; }
+}
+
+/* phone: show the whole building — fade only the bottom edge */
+@media (max-width: 768px) {
+  .hero-image {
+    top: 8px;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 8%, #000 62%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 8%, #000 62%, transparent 100%);
+    background-position: center top;
+  }
+}
+
+/* phone: taller banner so the facade detail shows; copy sits lower */
+@media (max-width: 768px) {
+  .hero-image {
+    height: min(80vw, 440px);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 6%, #000 84%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 6%, #000 84%, transparent 100%);
+  }
+  .hero-container { padding-top: calc(min(80vw, 440px) + 6px); }
+}

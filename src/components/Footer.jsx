@@ -21,6 +21,7 @@ export default function Footer() {
           © {new Date().getFullYear()} S. Guru Prasath · Chennai, Tamil Nadu, India
           <br />
           All rights reserved.
+          {/* Done with &#10084; by Santhan. */}
         </p>
         <motion.a
           href="#top"

@@ -175,7 +175,8 @@ COLLECTIONS.sort(
 export { COLLECTIONS }
 
 const has = (k) => COLLECTIONS.some((c) => c.kind === k)
-export const FILTERS = ['All', ...(has('3D') ? ['3D Models'] : []), ...(has('2D') ? ['2D Renders'] : [])]
+// ponytail: single filter hides the bar; restore the old list when more than one kind is worth filtering
+export const FILTERS = ['All']
 
 export function matchesFilter(c, f) {
   if (f === 'All') return true
