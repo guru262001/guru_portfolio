@@ -13,7 +13,7 @@ export default function Footer() {
         >
           <img className="brand__mark" src={logo} alt="" width="56" height="52" />
           <span>
-            <span className="brand__name">S. Guru Prasath</span>
+            <span className="brand__name">Guru Prasath</span>
             <span className="brand__role">3D Architectural Visualizer</span>
           </span>
         </motion.div>
