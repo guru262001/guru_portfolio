@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
 import { useScrolled, useActiveSection } from '../hooks'
 import logo from '../logos/gp.png'
+import wordmark from '../logos/wordmark.png'
 
 const LINKS = [
   { id: 'work', label: 'Work' },
@@ -34,8 +35,16 @@ export default function Navbar() {
           whileTap={{ scale: 0.98 }}
         >
           <img className="brand__mark" src={logo} alt="" width="58" height="54" />
-          <span>
-            <span className="brand__name">Guru Prasath</span>
+          <span className="brand__divider" aria-hidden="true" />
+          <span className="brand__text-container">
+            <img
+              className="brand__wordmark"
+              src={wordmark}
+              alt="Guru Prasath"
+              width="168"
+              height="30"
+              decoding="async"
+            />
             {/* <span className="brand__role">3D Architectural Visualizer</span> */}
           </span>
         </motion.a>

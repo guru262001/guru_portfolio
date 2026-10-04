@@ -253,11 +253,48 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border-bottom: 1px solid var(--line);
 }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 74px; }
-.brand { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; }
+.brand { display: flex; align-items: center; gap: 14px; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; text-decoration: none; }
 /* the mark is the GP monogram artwork — no tile behind it */
 .brand__mark { width: 58px; height: auto; flex-shrink: 0; object-fit: contain; }
-.brand__name { font-size: 1.7rem;font-weight: 0;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;line-height: 4opx; color:#a7adb8; }
-.brand__role { display: block; font-family: var(--font-sans); font-weight: 400; font-size: 0.72rem; letter-spacing: 2px; color: var(--text-mut); text-transform: uppercase; }
+
+/* Vertical metallic accent divider */
+.brand__divider {
+  display: inline-block;
+  width: 1.5px;
+  height: 32px;
+  background: linear-gradient(
+    180deg,
+    rgba(217, 164, 65, 0.08) 0%,
+    rgba(242, 202, 116, 0.85) 28%,
+    rgba(217, 164, 65, 0.95) 55%,
+    rgba(217, 164, 65, 0.75) 80%,
+    rgba(169, 120, 31, 0.12) 100%
+  );
+  box-shadow: 0 0 10px rgba(217, 164, 65, 0.35);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.brand__text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand__name { font-size: 1.7rem; font-weight: 600; font-family: system-ui, -apple-system, sans-serif; color: #a7adb8; }
+
+/* 3D Architectural Wordmark (Retina 3D Rendered Wordmark) */
+.brand__wordmark {
+  height: 30px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+.brand__role { display: block; font-family: var(--font-sans); font-weight: 400; font-size: 0.72rem; letter-spacing: 2px; color: var(--text-mut); text-transform: uppercase; margin-top: 2px; }
 
 .nav__links { display: flex; align-items: center; gap: 6px; }
 .nav__link {
@@ -2014,7 +2051,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .scroll-progress-bar { height: 3px !important; }
   .brand { gap: 10px; }
   .brand__mark { width: 46px; }
-  .brand__name { font-size: 1rem; letter-spacing: 0.01em; }
+  .brand__wordmark { height: 22px; }
   .brand__role { display: none; }
   .nav__burger { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line-strong); background: rgba(255,255,255,0.04); color: var(--gold-bright); }
   .drawer { background: radial-gradient(90% 60% at 50% 0%, rgba(217,164,65,0.14), rgba(8,9,11,0.97) 70%); }
@@ -2305,5 +2342,4 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .contact__fade { display: none; }
 }
 
-/* header name in Heading Now, heavy; falls back to Space Grotesk until the file is added */
-.nav .brand__name { font-family: 'Heading Now', var(--font-display); font-weight: 800; }
+/* 3D wordmark typography is specified in .brand__name--3d */
